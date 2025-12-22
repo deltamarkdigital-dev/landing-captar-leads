@@ -54,10 +54,10 @@ export async function submitLead(formData: FormData) {
 
     return {
       success: true,
-      message: "Lead cadastrado com sucesso!",
+      message: "Cadastro realizado com sucesso! Em breve, avisaremos quando você for adicionado(a) ao grupo.",
     }
   } catch (error) {
-    console.error("[v0] Erro inesperado:", error)
+    console.error("Erro inesperado:", error)
     return {
       success: false,
       error: "Erro inesperado. Tente novamente.",
