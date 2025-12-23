@@ -14,6 +14,7 @@ export function LeadForm() {
   const [nome, setNome] = useState("")
   const [telefone, setTelefone] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +37,10 @@ export function LeadForm() {
 
     if (result.success) {
       setMessage({ type: "success", text: result.message || "Cadastro realizado!" })
+      setIsSubmitted(true)
       setNome("")
       setTelefone("")
 
-      // Limpa a mensagem após 5 segundos
       setTimeout(() => setMessage(null), 5000)
     } else {
       setMessage({ type: "error", text: result.error || "Erro ao enviar" })
@@ -61,7 +62,7 @@ export function LeadForm() {
             onChange={(e) => setNome(e.target.value)}
             placeholder="Digite seu nome"
             required
-            disabled={isLoading}
+            disabled={isLoading || isSubmitted}
             className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 h-12"
           />
         </div>
@@ -80,7 +81,7 @@ export function LeadForm() {
             onChange={handlePhoneChange}
             placeholder="(00) 00000-0000"
             required
-            disabled={isLoading}
+            disabled={isLoading || isSubmitted}
             className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-blue-400 focus:ring-blue-400/20 h-12"
           />
         </div>
@@ -101,13 +102,18 @@ export function LeadForm() {
 
       <Button
         type="submit"
-        disabled={isLoading}
-        className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg shadow-blue-500/30 transition-all duration-200"
+        disabled={isLoading || isSubmitted}
+        className="w-full h-12 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold shadow-lg shadow-blue-500/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
             Enviando...
+          </>
+        ) : isSubmitted ? (
+          <>
+            <CheckCircle2 className="mr-2 h-5 w-5" />
+            Cadastro Realizado!
           </>
         ) : (
           "Quero entrar no Grupo"
