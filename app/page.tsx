@@ -24,7 +24,7 @@ export default function Home() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-blue-100/80 text-pretty leading-relaxed">
-                Entre para o Grupo Grátis e tenha acesso a conteúdos exclusivos que vão te ajudar a se comunicar com mais clareza, segurança e naturalidade, mesmo que você seja tímido ou introvertido.
+                Entre e tenha acesso a conteúdos exclusivos que vão te ajudar a se comunicar com mais clareza, segurança e naturalidade, mesmo que você seja tímido ou introvertido.
               </p>
             </div>
 
